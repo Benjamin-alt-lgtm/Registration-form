@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Registration Form</title>
+</head>
+<body class="bg-gradient-to-b from-orange-200 to-orange-600 py-8 flex justify-center items-center min-h-screen">
+    <div class="bg-white rounded-md px-6 py-6 w-full max-w-md sm:max-w-lg">
+        <h1 class="text-center font-bold text-3xl mb-2">Registration Form</h1>
+        <p class="text-center text-gray-400 mb-6">Fill out the form carefully for registration</p>
+        <form id="registrationForm" action="/submit" method="POST">
+            <label for="firstName" class="font-bold block mb-1">Participant Name</label>
+            <div class="flex flex-col sm:flex-row gap-5 mb-4">
+                <div class="flex-1">
+                    <input id="firstName" name="firstName" class="border px-2 py-1 rounded-md w-full" type="text"
+                        placeholder="Firstname" required>
+                    <p class="text-gray-400 text-sm">Firstname</p>
+                    <span id="firstName-error" class="text-red-500 text-sm hidden"></span>
+                </div>
+                <div class="flex-1">
+                    <input id="lastName" name="lastName" class="border px-2 py-1 rounded-md w-full" type="text"
+                        placeholder="Lastname" required>
+                    <p class="text-gray-400 text-sm">Lastname</p>
+                    <span id="lastName-error" class="text-red-500 text-sm hidden"></span>
+                </div>
+            </div>
+
+            <fieldset class="mb-4" aria-describedby="gender-error">
+                <legend class="font-bold mb-1">Gender</legend>
+                <div class="flex gap-4">
+                    <div>
+                        <input id="female" type="radio" name="gender" value="Female" required>
+                        <label for="female">Female</label>
+                    </div>
+                    <div>
+                        <input id="male" type="radio" name="gender" value="Male">
+                        <label for="male">Male</label>
+                    </div>
+                </div>
+                <span id="gender-error" class="text-red-500 text-sm hidden"></span>
+            </fieldset>
+
+            <label for="email" class="font-bold block mb-1">Email</label>
+            <div class="mb-4">
+                <input id="email" name="email" class="border px-2 py-1 rounded-md w-full" type="email"
+                    placeholder="Your email.." required>
+                <span id="email-error" class="text-red-500 text-sm hidden"></span>
+            </div>
+
+            <label for="phone" class="font-bold block mb-1">Phone</label>
+            <div class="mb-4">
+                <input id="phone" name="phone" class="border px-2 py-1 rounded-md w-full" type="tel"
+                    placeholder="Enter phone.." required>
+                <span id="phone-error" class="text-red-500 text-sm hidden"></span>
+            </div>
+
+            <label for="dateOfBirth" class="font-bold block mb-1">Date of Birth</label>
+            <div class="mb-4">
+                <input id="dateOfBirth" name="dateOfBirth" class="border px-2 py-1 rounded-md w-full" type="date"
+                    required>
+                <span id="dateOfBirth-error" class="text-red-500 text-sm hidden"></span>
+            </div>
+
+            <label for="password" class="font-bold block mb-1">Password</label>
+            <div class="mb-4">
+                <input id="password" name="password" class="border px-2 py-1 rounded-md w-full" type="password"
+                    placeholder="Enter password.." required minlength="8" aria-describedby="password-hint">
+                <p id="password-hint" class="text-gray-400 text-sm">Must be at least 8 characters.</p>
+                <span id="password-error" class="text-red-500 text-sm hidden"></span>
+            </div>
+
+            <div
+
+ class="flex justify-center py-4">
+                <button type="submit" class="px-5 py-2 bg-green-700 hover:bg-green-800 text-white rounded-md">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+
+<footer>
+    
+</footer>
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Registration Form</title>
+</head>
+
+<body class="px-[700px] bg-gradient-to-b from-orange-600 to-orange-200 py-32">
+    <div class="bg-white rounded-md px-6 -[500px]">
+        <h1 class="text-center font-bold text-3xl pt-5"> Registration Form</h1>
+        <p class="text-center text-gray-400 pb-10">Fill out the form carefully for registration</p>
+        <div>
+            <form action="">
+                <label for="Name" class="text-center font-bold">Participant Name</label>
+                <div class="flex gap-5 mb-3">
+                    <div>
+                        <input class="border px-2 rounded-md" type="text" placeholder="">
+                        <p class="text-gray-400">Firstname</p>
+                    </div>
+                    <div>
+                        <input class="border px-2 rounded-md" type="text" placeholder="">
+                        <p class="text-gray-400">Lastname</p>
+                    </div>
+                </div>
+
+                <label for="Gender">Gender</label>
+                <div class=" mb-3">
+                    <input type="radio" name="Gender" value="Female"> <span class="mr-7">Female</span>
+                    <input type="radio" name="Gender" value="Male"> <span>Male</span>
+                </div>
+
+                <label for="email">Email</label>
+                <div class="pb-3">
+                    <input class="border px-2 rounded-md" type="text" placeholder=" your email..">
+                </div>
+
+                <label for="phone">Phone</label>
+                <div class="pb-3">
+                    <input class="px-2  border rounded-md" type="text" placeholder="Enter phone..">
+                </div>
+
+                <label for="password">Password</label>
+                <div class="pb-3">
+                    <input class="px-2  border rounded-md" type="password" placeholder="must be above 8 charaters..">
+                </div>
+
+                <div class="flex gap-5 justify-center py-5">
+                    <div>
+                        <button class="px-5 py-1 bg-green-700 hover:bg-red-950 text-white rounded-md">Login</button>
+                    </div>
+                    <div>
+                        <button class="px-5 py-1 bg-green-700 hover:bg-red-950 text-white rounded-md">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+      <script>
+        //Prevent form submission till validation is passed
+        window.addEventListener('DOMContentLoaded', () =>{
+            let form = document.querySelector('form')
+            form.addEventListener('submit', (e) => {
+                e.preventDefault() 
+                let isValid = true
+
+                //Reseting error
+                document.querySelectorAll('text-red-500').foreach((error) =>{
+                    error.inneerText = ''
+                    error.classList.add('hidden')
+                })
+
+        //Firstname require, 2 letters above 
+        let firstName = document.getElementById('firstname').value
+        let firstNameError = document.getElementById('firstname-error')
+        if (!firstName){
+            firstNameError.innerText = 'FIrst name is required.'
+            firstNameError.classList.remove('hidden')
+            isValid = false
+        }
+        else if (!/^[A-Za-z]{2,}$/.test(firstName)) {
+            firstNameError.textContent = 'First name must be at least 2 letters.';
+            firstNameError.classList.remove('hidden');
+            isValid = false;
+        }
+               //Lastname require, 2 letters above 
+        let lastName = document.getElementById('lastname').value
+        let lastNameError = document.getElementById('lastname-error')
+        if (!lastName){
+            lastNameError.innerText = 'Last name is required.'
+            lastNameError.classList.remove('hidden')
+            isValid = false
+        }
+        else if (!/^[A-Za-z]{2,}$/.test(lastName)) {
+            lastNameError.textContent = 'First name must be at least 2 letters.';
+            lastNameError.classList.remove('hidden');
+            isValid = false;
+        }
+
+        // GENDER: SELECTION
+        let gender = document.querySelector('input[name="gender"]checked')
+        let genderError = docuument.getElementById('gender-error')
+        if(!gender){
+            genderError.innerText = 'Please select a gender'
+            genderError.classList.remove('hidden')
+            isValid = false
+        }
+
+
+          // EMAAL: VALID FORMAT REQUIRED
+        let email = document.getElementById('email').value
+        let emailError = document.getElementById('email-error')
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!email){
+            emailError.innerText = 'Email is required'
+            emailError.classList.remove('hidden')
+            isValid = false
+        }
+        else if (!emailRegex){
+            emailError.innerText = 'Email is required';
+            emailError.classList.remove('hidden')
+            isValid = false
+        }
+
+        // PHONE NUMBER IS REQUIRED
+        let phone = getElementById('phone').value
+        let phoneError = getElementById('phone-error')
+        if(!phone){
+            phoneError.innerText = 'Phone number is required.'
+            phoneError.classList.remove('hiden')
+            isValid = false
+        }
+
+
+        //DATE OF BIRTTH MUST BE 18 ABOVE 
+        let dateOfBirth = document.getElementById('dateOfBirth').value
+        let dateError = documen.getElementById('date-error')
+        let dateYear = 18++
+        if(!dateOfBirth){
+            dateError.inneerText = "Date of birth required"
+            dateError.classList.remove('hidden')
+            isValid = false
+        }
+        else if(!dateYear){
+            dateError.inneerText = 'Must be 18 or above'
+            dateError.classList.remove('hidden')
+        }
+        //PASSWORD REQUIRED 8+ CHARCTERS
+        let password = getElementById('password').value
+        let passwordError = getElementById('password-error')
+        let passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+        if (password){
+            passwordError.innerText ='Passowrd is required'
+            passwordError.classList.remove('hidden')
+            isValid = false
+        }
+        else if (!passwordRegex.test(password)){
+            passwordError.inneerText ='Passwrord must be above 8 characters'
+            passwordError.classList.remove('hidden')
+            isValid = false
+        }
+
+        //if all validations are pass, then submit form
+        if(isValid){
+            alert('Form Submitted Succefully!')
+            form.submit()
+        }
+            })
+        
+        })
+    </script>
+</body>
+
+</html> -->
