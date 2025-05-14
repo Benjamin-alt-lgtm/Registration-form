@@ -5,13 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const showError = (input, errorElement, message) => {
         errorElement.textContent = message;
         errorElement.classList.remove('hidden');
-        input.classList.add('border-red-500');
+        if (input.type === 'radio') {
+            // For radio buttons, highlight the fieldset or container
+            input.closest('fieldset').classList.add('border-red-500', 'border', 'rounded-md', 'p-2');
+        } else {
+            input.classList.add('border-red-500');
+        }
     };
 
     const clearError = (input, errorElement) => {
         errorElement.textContent = '';
         errorElement.classList.add('hidden');
-        input.classList.remove('border-red-500');
+        if (input.type === 'radio') {
+            input.closest('fieldset').classList.remove('border-red-500', 'border', 'rounded-md', 'p-2');
+        } else {
+            input.classList.remove('border-red-500');
+        }
     };
 
     // Validate age (must be 18+)
@@ -30,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('dateOfBirth').max = new Date().toISOString().split('T')[0];
 
     // Form submission
-    form.addEventListener('submit',(e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         let isValid = true;
 
@@ -42,9 +51,50 @@ document.addEventListener('DOMContentLoaded', () => {
         form.querySelectorAll('input').forEach((input) => {
             input.classList.remove('border-red-500');
         });
+        form.querySelectorAll('fieldset').forEach((fieldset) => {
+            fieldset.classList.remove('border-red-500', 'border', 'rounded-md', 'p-2');
+        });
+
+        // Check if all fields are empty
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const dateInput = document.getElementById('dateOfBirth');
+        const passwordInput = document.getElementById('password');
+        const gender = document.querySelector('input[name="gender"]:checked');
+
+        const allFieldsEmpty =
+            !firstNameInput.value.trim() &&
+            !lastNameInput.value.trim() &&
+            !emailInput.value.trim() &&
+            !phoneInput.value.trim() &&
+            !dateInput.value &&
+            !passwordInput.value &&
+            !gender;
+
+        const generalError = document.getElementById('general-error');
+        if (allFieldsEmpty) {
+            generalError.textContent = 'Please fill in all fields.';
+            generalError.classList.remove('hidden');
+            [firstNameInput, lastNameInput, emailInput, phoneInput, dateInput, passwordInput].forEach(
+                (input) => {
+                    input.classList.add('border-red-500');
+                }
+            );
+            // Highlight gender fieldset
+            document
+                .querySelector('input[name="gender"]')
+                .closest('fieldset')
+                .classList.add('border-red-500', 'border', 'rounded-md', 'p-2');
+            firstNameInput.focus();
+            return; // Stop further validation
+        } else {
+            generalError.textContent = '';
+            generalError.classList.add('hidden');
+        }
 
         // First Name
-        const firstNameInput = document.getElementById('firstName');
         const firstName = firstNameInput.value.trim();
         const firstNameError = document.getElementById('firstName-error');
         if (!firstName) {
@@ -58,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Last Name
-        const lastNameInput = document.getElementById('lastName');
         const lastName = lastNameInput.value.trim();
         const lastNameError = document.getElementById('lastName-error');
         if (!lastName) {
@@ -72,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Gender
-        const gender = document.querySelector('input[name="gender"]:checked');
         const genderError = document.getElementById('gender-error');
         const genderInput = document.querySelector('input[name="gender"]');
         if (!gender) {
@@ -83,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Email
-        const emailInput = document.getElementById('email');
         const email = emailInput.value.trim();
         const emailError = document.getElementById('email-error');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -98,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Phone
-        const phoneInput = document.getElementById('phone');
         const phone = phoneInput.value.trim();
         const phoneError = document.getElementById('phone-error');
         const phoneRegex = /^\+?[\d-]{10,15}$/;
@@ -113,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Date of Birth
-        const dateInput = document.getElementById('dateOfBirth');
         const dateOfBirth = dateInput.value;
         const dateError = document.getElementById('dateOfBirth-error');
         if (!dateOfBirth) {
@@ -127,15 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Password
-        const passwordInput = document.getElementById('password');
         const password = passwordInput.value;
         const passwordError = document.getElementById('password-error');
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/; 
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/;
         if (!password) {
             showError(passwordInput, passwordError, 'Password is required.');
             isValid = false;
         } else if (!passwordRegex.test(password)) {
-            showError(passwordInput, passwordError, 'Password must be 8+ characters with at least one letter and one number.');
+            showError(
+                passwordInput,
+                passwordError,
+                'Password must be 8+ characters with at least one letter and one number.'
+            );
             isValid = false;
         } else {
             clearError(passwordInput, passwordError);
@@ -146,7 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const firstError = document.querySelector('.text-red-500:not(.hidden)');
             if (firstError) {
                 const inputId = firstError.id.replace('-error', '');
-                document.getElementById(inputId).focus();
+                const input = document.getElementById(inputId);
+                if (input) input.focus();
             }
         }
 
@@ -155,6 +204,11 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Form submitted successfully!');
             form.submit();
         }
+
+        const button = document.getElementById('mybutton')
+        button.addEventListener('click', () => {
+            alert ('Button Clicked!')
+        })
     });
 
     // Real-time validation
